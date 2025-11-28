@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>E-Library — Dev Landing</title>
+  <style>
+    body{font-family:Segoe UI,Arial,Helvetica,sans-serif;max-width:960px;margin:40px auto;color:#222}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:1.6rem}
+    .card{border:1px solid #e0e0e0;padding:16px;margin:16px 0;border-radius:6px}
+    button{padding:8px 12px;border-radius:4px;border:1px solid #ccc;background:#f7f7f7}
+    pre{background:#f3f3f3;padding:12px;border-radius:4px;overflow:auto}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>E-Library — Dev Landing</h1>
+    <small>Static UI for local development</small>
+  </header>
+
+  <div class="card">
+    <strong>Quick links</strong>
+    <ul>
+      <li><a href="/api/elibrary/books">/api/elibrary/books</a></li>
+      <li><a href="/api/elibrary/education-levels">/api/elibrary/education-levels</a></li>
+      <li><a href="/api/elibrary/statistics">/api/elibrary/statistics</a></li>
+      <li><a href="/soap/ELibraryService?wsdl">/soap/ELibraryService?wsdl</a> (SOAP WSDL)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <strong>Health check</strong>
+    <div>
+      <button id="btn-health">Call /api/elibrary/health</button>
+      <pre id="health-result">Not called yet</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <strong>XPath tester</strong>
+    <div>
+      <textarea id="xpath" rows="3" style="width:100%;">/ELibrary/educationLevels/educationLevel</textarea>
+      <div style="margin-top:8px">
+        <button id="btn-xpath">Run XPath</button>
+      </div>
+      <pre id="xpath-result">No result</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <strong>Books</strong>
+    <div>
+      <button id="btn-load-books">Load books</button>
+      <div id="books-container" style="margin-top:12px">
+        <em>Books will appear here after loading.</em>
+      </div>
+      <pre id="book-detail" style="margin-top:12px;display:none"></pre>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('btn-health').addEventListener('click', async ()=>{
+      try{
+        const r = await fetch('/api/elibrary/health');
+        const text = await r.text();
+        try {
+          const j = JSON.parse(text);
+          document.getElementById('health-result').textContent = JSON.stringify(j, null, 2);
+        } catch (e) {
+          document.getElementById('health-result').textContent = text;
+        }
+      }catch(e){ document.getElementById('health-result').textContent = String(e);}    
+    });
+
+    document.getElementById('btn-xpath').addEventListener('click', async ()=>{
+      const query = document.getElementById('xpath').value;
+      try{
+        const r = await fetch('/api/elibrary/xpath',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({query})
+        });
+        const text = await r.text();
+        try { document.getElementById('xpath-result').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+        catch(e) { document.getElementById('xpath-result').textContent = text; }
+      }catch(e){ document.getElementById('xpath-result').textContent = String(e);}
+    });
+
+    // Books UI
+    async function loadBooks(){
+      const container = document.getElementById('books-container');
+      container.textContent = 'Loading...';
+      try{
+        const r = await fetch('/api/elibrary/books');
+        const text = await r.text();
+        let data;
+        try{ data = JSON.parse(text); } catch(e){ container.textContent = 'Failed to parse JSON: '+text; return; }
+
+        if(!Array.isArray(data) || data.length===0){ container.innerHTML = '<em>No books found.</em>'; return; }
+
+        const ul = document.createElement('ul');
+        ul.style.listStyle='none';
+        ul.style.padding='0';
+        data.forEach(b=>{
+          const li = document.createElement('li');
+          li.style.padding='8px 0';
+          const title = document.createElement('strong');
+          title.textContent = b.title || '[no title]';
+          const meta = document.createElement('div');
+          meta.style.fontSize='0.9em';
+          meta.style.color='#444';
+          meta.textContent = (b.author?('by '+b.author):'') + (b.publicationYear?(' • '+b.publicationYear):'') + (b.field?(' • '+b.field):'');
+          const view = document.createElement('button');
+          view.textContent = 'View';
+          view.style.marginLeft='12px';
+          view.addEventListener('click', ()=> showBookDetail(b.id));
+          li.appendChild(title);
+          li.appendChild(view);
+          li.appendChild(meta);
+          ul.appendChild(li);
+        });
+        container.innerHTML='';
+        container.appendChild(ul);
+      }catch(e){ document.getElementById('books-container').textContent = String(e); }
+    }
+
+    async function showBookDetail(id){
+      const detail = document.getElementById('book-detail');
+      detail.style.display='block';
+      detail.textContent = 'Loading...';
+      try{
+        const r = await fetch('/api/elibrary/books/'+encodeURIComponent(id));
+        const text = await r.text();
+        try{ const j = JSON.parse(text); detail.textContent = JSON.stringify(j, null, 2); }
+        catch(e){ detail.textContent = text; }
+      }catch(e){ detail.textContent = String(e); }
+    }
+
+    document.getElementById('btn-load-books').addEventListener('click', loadBooks);
+    // auto-load on page open
+    loadBooks();
+  </script>
+</body>
+</html>
