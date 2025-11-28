@@ -3,7 +3,7 @@ package e_library.soap;
 import e_library.model.Book;
 import e_library.model.EducationLevel;
 import e_library.service.XMLParserService;
-import jakarta.jws.WebService;
+import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

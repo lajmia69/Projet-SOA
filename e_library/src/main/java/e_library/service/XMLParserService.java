@@ -3,9 +3,9 @@ package e_library.service;
 import e_library.model.Book;
 import e_library.model.ELibrary;
 import e_library.model.EducationLevel;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import org.springframework.stereotype.Service;
 
 import javax.xml.xpath.*;
@@ -14,6 +14,7 @@ import javax.xml.parsers.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class XMLParserService {
@@ -61,17 +62,19 @@ public class XMLParserService {
     }
 
     public List<EducationLevel> getAllEducationLevels() {
-        return eLibrary != null ? eLibrary.getEducationLevels() : new ArrayList<>();
+        return eLibrary != null ? eLibrary.getEducationLevels() : new ArrayList<EducationLevel>();
     }
 
     public EducationLevel getEducationLevelByCode(String code) {
         if (eLibrary == null || eLibrary.getEducationLevels() == null) {
             return null;
         }
-        return eLibrary.getEducationLevels().stream()
-                .filter(level -> level.getCode().equals(code))
-                .findFirst()
-                .orElse(null);
+        for (EducationLevel level : eLibrary.getEducationLevels()) {
+            if (level.getCode().equals(code)) {
+                return level;
+            }
+        }
+        return null;
     }
 
     public List<Book> getAllBooks() {
@@ -87,62 +90,99 @@ public class XMLParserService {
     }
 
     public Book getBookById(String bookId) {
-        return getAllBooks().stream()
-                .filter(book -> book.getId().equals(bookId))
-                .findFirst()
-                .orElse(null);
+        for (Book book : getAllBooks()) {
+            if (book.getId().equals(bookId)) {
+                return book;
+            }
+        }
+        return null;
     }
 
     public List<Book> getBooksByEducationLevel(String code) {
         EducationLevel level = getEducationLevelByCode(code);
-        return level != null && level.getBooks() != null ? level.getBooks() : new ArrayList<>();
+        return level != null && level.getBooks() != null ? level.getBooks() : new ArrayList<Book>();
     }
 
-    public List<Book> getBooksByLanguage(String language) {
+    public List<Book> getBooksByLanguage(final String language) {
         return getAllBooks().stream()
-                .filter(book -> book.getLanguage() != null && 
-                               book.getLanguage().equalsIgnoreCase(language))
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return book.getLanguage() != null && 
+                               book.getLanguage().equalsIgnoreCase(language);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksByField(String field) {
+    public List<Book> getBooksByField(final String field) {
         return getAllBooks().stream()
-                .filter(book -> field != null && field.equals(book.getField()))
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return field != null && field.equals(book.getField());
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksBySpecialization(String specialization) {
+    public List<Book> getBooksBySpecialization(final String specialization) {
         return getAllBooks().stream()
-                .filter(book -> specialization != null && 
-                               specialization.equals(book.getSpecialization()))
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return specialization != null && 
+                               specialization.equals(book.getSpecialization());
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksByAuthor(String author) {
+    public List<Book> getBooksByAuthor(final String author) {
         return getAllBooks().stream()
-                .filter(book -> book.getAuthor() != null && 
-                               book.getAuthor().toLowerCase().contains(author.toLowerCase()))
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return book.getAuthor() != null && 
+                               book.getAuthor().toLowerCase().contains(author.toLowerCase());
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksBySubject(String subject) {
+    public List<Book> getBooksBySubject(final String subject) {
         return getAllBooks().stream()
-                .filter(book -> book.getSubject() != null && 
-                               book.getSubject().toLowerCase().contains(subject.toLowerCase()))
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return book.getSubject() != null && 
+                               book.getSubject().toLowerCase().contains(subject.toLowerCase());
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksByYear(int year) {
+    public List<Book> getBooksByYear(final int year) {
         return getAllBooks().stream()
-                .filter(book -> book.getPublicationYear() == year)
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return book.getPublicationYear() == year;
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksByFormat(String format) {
+    public List<Book> getBooksByFormat(final String format) {
         return getAllBooks().stream()
-                .filter(book -> book.getFormat() != null && 
-                               book.getFormat().equalsIgnoreCase(format))
-                .toList();
+                .filter(new java.util.function.Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        return book.getFormat() != null && 
+                               book.getFormat().equalsIgnoreCase(format);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     public String executeXPathQuery(String xpathQuery) {

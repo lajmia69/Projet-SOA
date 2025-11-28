@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,7 +114,9 @@ public class ELibraryRESTController {
     public ResponseEntity<Map<String, String>> executeXPathQuery(@RequestBody Map<String, String> request) {
         String xpathQuery = request.get("query");
         if (xpathQuery == null || xpathQuery.isEmpty()) {
-            return ResponseEntity.badRequest().body(Map.of("error", "XPath query is required"));
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "XPath query is required");
+            return ResponseEntity.badRequest().body(error);
         }
         
         String result = xmlParserService.executeXPathQuery(xpathQuery);
@@ -142,32 +145,48 @@ public class ELibraryRESTController {
     // Search books by multiple criteria
     @GetMapping(value = "/books/search", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Book>> searchBooks(
-            @RequestParam(required = false) String language,
-            @RequestParam(required = false) String field,
-            @RequestParam(required = false) String format,
-            @RequestParam(required = false) Integer year) {
+            @RequestParam(required = false) final String language,
+            @RequestParam(required = false) final String field,
+            @RequestParam(required = false) final String format,
+            @RequestParam(required = false) final Integer year) {
         
         List<Book> books = xmlParserService.getAllBooks();
         
         if (language != null) {
-            books = books.stream()
-                    .filter(b -> b.getLanguage().equalsIgnoreCase(language))
-                    .toList();
+            List<Book> filtered = new ArrayList<>();
+            for (Book b : books) {
+                if (b.getLanguage().equalsIgnoreCase(language)) {
+                    filtered.add(b);
+                }
+            }
+            books = filtered;
         }
         if (field != null) {
-            books = books.stream()
-                    .filter(b -> field.equals(b.getField()))
-                    .toList();
+            List<Book> filtered = new ArrayList<>();
+            for (Book b : books) {
+                if (field.equals(b.getField())) {
+                    filtered.add(b);
+                }
+            }
+            books = filtered;
         }
         if (format != null) {
-            books = books.stream()
-                    .filter(b -> b.getFormat().equalsIgnoreCase(format))
-                    .toList();
+            List<Book> filtered = new ArrayList<>();
+            for (Book b : books) {
+                if (b.getFormat().equalsIgnoreCase(format)) {
+                    filtered.add(b);
+                }
+            }
+            books = filtered;
         }
         if (year != null) {
-            books = books.stream()
-                    .filter(b -> b.getPublicationYear() == year)
-                    .toList();
+            List<Book> filtered = new ArrayList<>();
+            for (Book b : books) {
+                if (b.getPublicationYear() == year) {
+                    filtered.add(b);
+                }
+            }
+            books = filtered;
         }
         
         return ResponseEntity.ok(books);
