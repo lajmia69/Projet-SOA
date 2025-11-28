@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eLibrary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="elibrary.xsd">
+    
+    <!-- Primary Education (Enseignement Primaire) -->
+    <educationLevel id="L001" code="PRIMARY">
+        <n>Enseignement Primaire</n>
+        <duration>6 years</duration>
+        <grades>
+            <grade number="1">1ère année primaire</grade>
+            <grade number="2">2ème année primaire</grade>
+            <grade number="3">3ème année primaire</grade>
+            <grade number="4">4ème année primaire</grade>
+            <grade number="5">5ème année primaire</grade>
+            <grade number="6">6ème année primaire</grade>
+        </grades>
+        <books>
+            <book id="B001">
+                <title>القراءة العربية للسنة الأولى</title>
+                <subject>Arabic Language</subject>
+                <author>وزارة التربية التونسية</author>
+                <isbn>978-9973-123-45-6</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>Arabic</language>
+            </book>
+            <book id="B002">
+                <title>Mathématiques 1ère année</title>
+                <subject>Mathematics</subject>
+                <author>Ministère de l'Éducation</author>
+                <isbn>978-9973-123-46-3</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B003">
+                <title>Sciences Naturelles 6ème année</title>
+                <subject>Natural Sciences</subject>
+                <author>Ahmed Ben Salem</author>
+                <isbn>978-9973-123-47-0</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>EPUB</format>
+                <language>French</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Secondary Education - Preparatory (Collège) -->
+    <educationLevel id="L002" code="PREPARATORY">
+        <n>Enseignement Préparatoire</n>
+        <duration>3 years</duration>
+        <grades>
+            <grade number="7">7ème année de base</grade>
+            <grade number="8">8ème année de base</grade>
+            <grade number="9">9ème année de base</grade>
+        </grades>
+        <books>
+            <book id="B004">
+                <title>Physique-Chimie 9ème année</title>
+                <subject>Physics and Chemistry</subject>
+                <author>Mohamed Trabelsi</author>
+                <isbn>978-9973-124-01-2</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B005">
+                <title>التاريخ والجغرافيا للسنة الثامنة</title>
+                <subject>History and Geography</subject>
+                <author>فاطمة بن عمر</author>
+                <isbn>978-9973-124-02-9</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>Arabic</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Secondary Education (Lycée) -->
+    <educationLevel id="L003" code="SECONDARY">
+        <n>Enseignement Secondaire</n>
+        <duration>4 years</duration>
+        <grades>
+            <grade number="10">1ère année secondaire</grade>
+            <grade number="11">2ème année secondaire</grade>
+            <grade number="12">3ème année secondaire</grade>
+            <grade number="13">4ème année secondaire (Baccalauréat)</grade>
+        </grades>
+        <specializations>
+            <specialization code="SCI">Sciences Expérimentales</specialization>
+            <specialization code="MATH">Mathématiques</specialization>
+            <specialization code="TECH">Sciences Techniques</specialization>
+            <specialization code="ECO">Économie et Gestion</specialization>
+            <specialization code="LETT">Lettres</specialization>
+            <specialization code="INFO">Sciences de l'Informatique</specialization>
+        </specializations>
+        <books>
+            <book id="B006" specialization="MATH">
+                <title>Analyse Mathématique - Bac Mathématiques</title>
+                <subject>Advanced Mathematics</subject>
+                <author>Hedi Lakhal</author>
+                <isbn>978-9973-125-01-8</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B007" specialization="SCI">
+                <title>Biologie - Sciences Expérimentales</title>
+                <subject>Biology</subject>
+                <author>Salma Gharbi</author>
+                <isbn>978-9973-125-02-5</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>EPUB</format>
+                <language>French</language>
+            </book>
+            <book id="B008" specialization="INFO">
+                <title>Programmation et Algorithmique</title>
+                <subject>Computer Science</subject>
+                <author>Karim Jebali</author>
+                <isbn>978-9973-125-03-2</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Higher Education - Licence (Bachelor) -->
+    <educationLevel id="L004" code="LICENCE">
+        <n>Licence (Bachelor)</n>
+        <duration>3 years</duration>
+        <fields>
+            <field code="ENG">Engineering Sciences</field>
+            <field code="MED">Medicine and Health Sciences</field>
+            <field code="SCI">Pure Sciences</field>
+            <field code="HUM">Humanities and Social Sciences</field>
+            <field code="ECON">Economics and Management</field>
+            <field code="LAW">Law and Political Sciences</field>
+            <field code="IT">Information Technology</field>
+            <field code="ART">Arts and Design</field>
+        </fields>
+        <books>
+            <book id="B009" field="IT">
+                <title>Database Management Systems</title>
+                <subject>Database Systems</subject>
+                <author>Nizar Bouguila</author>
+                <isbn>978-9973-126-01-4</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>English</language>
+            </book>
+            <book id="B010" field="ECON">
+                <title>Microéconomie Avancée</title>
+                <subject>Microeconomics</subject>
+                <author>Leila Mahjoub</author>
+                <isbn>978-9973-126-02-1</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B011" field="ENG">
+                <title>Mécanique des Fluides</title>
+                <subject>Fluid Mechanics</subject>
+                <author>Tarek Abidi</author>
+                <isbn>978-9973-126-03-8</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B012" field="MED">
+                <title>Anatomie Humaine</title>
+                <subject>Human Anatomy</subject>
+                <author>Dr. Samia Chouchane</author>
+                <isbn>978-9973-126-04-5</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Master's Degree (Mastère) -->
+    <educationLevel id="L005" code="MASTER">
+        <n>Mastère (Master)</n>
+        <duration>2 years</duration>
+        <types>
+            <type code="RESEARCH">Mastère de Recherche</type>
+            <type code="PROFESSIONAL">Mastère Professionnel</type>
+        </types>
+        <fields>
+            <field code="ENG">Engineering Sciences</field>
+            <field code="MED">Medicine and Health Sciences</field>
+            <field code="SCI">Pure Sciences</field>
+            <field code="HUM">Humanities and Social Sciences</field>
+            <field code="ECON">Economics and Management</field>
+            <field code="LAW">Law and Political Sciences</field>
+            <field code="IT">Information Technology</field>
+            <field code="AGRI">Agriculture and Food Sciences</field>
+        </fields>
+        <books>
+            <book id="B013" field="IT" type="RESEARCH">
+                <title>Machine Learning and Deep Learning</title>
+                <subject>Artificial Intelligence</subject>
+                <author>Youssef Ben Ayed</author>
+                <isbn>978-9973-127-01-0</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>English</language>
+            </book>
+            <book id="B014" field="ECON" type="PROFESSIONAL">
+                <title>Finance d'Entreprise Avancée</title>
+                <subject>Corporate Finance</subject>
+                <author>Riadh Manai</author>
+                <isbn>978-9973-127-02-7</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>EPUB</format>
+                <language>French</language>
+            </book>
+            <book id="B015" field="ENG" type="RESEARCH">
+                <title>Renewable Energy Systems</title>
+                <subject>Energy Engineering</subject>
+                <author>Hatem Mhiri</author>
+                <isbn>978-9973-127-03-4</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>English</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Doctorate (Doctorat) -->
+    <educationLevel id="L006" code="DOCTORATE">
+        <n>Doctorat (PhD)</n>
+        <duration>3-5 years</duration>
+        <fields>
+            <field code="ENG">Engineering Sciences</field>
+            <field code="MED">Medicine and Health Sciences</field>
+            <field code="SCI">Pure Sciences</field>
+            <field code="HUM">Humanities and Social Sciences</field>
+            <field code="ECON">Economics and Management</field>
+            <field code="LAW">Law and Political Sciences</field>
+            <field code="IT">Information Technology</field>
+            <field code="AGRI">Agriculture and Food Sciences</field>
+            <field code="PHARM">Pharmacy</field>
+        </fields>
+        <books>
+            <book id="B016" field="IT">
+                <title>Advanced Cryptography and Network Security</title>
+                <subject>Cybersecurity</subject>
+                <author>Dr. Slim Rekhis</author>
+                <isbn>978-9973-128-01-6</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>English</language>
+            </book>
+            <book id="B017" field="SCI">
+                <title>Quantum Mechanics and Applications</title>
+                <subject>Quantum Physics</subject>
+                <author>Dr. Nejib Friji</author>
+                <isbn>978-9973-128-02-3</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>English</language>
+            </book>
+            <book id="B018" field="MED">
+                <title>Oncologie Moléculaire</title>
+                <subject>Molecular Oncology</subject>
+                <author>Dr. Amel Mezlini</author>
+                <isbn>978-9973-128-03-0</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B019" field="HUM">
+                <title>التراث الثقافي التونسي: دراسة أنثروبولوجية</title>
+                <subject>Cultural Anthropology</subject>
+                <author>د. منى الشابي</author>
+                <isbn>978-9973-128-04-7</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>Arabic</language>
+            </book>
+        </books>
+    </educationLevel>
+
+</eLibrary>
