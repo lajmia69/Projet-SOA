@@ -24,7 +24,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic restServlet = servletContext.addServlet(
                 "restServlet", new DispatcherServlet(context));
         restServlet.setLoadOnStartup(1);
-        restServlet.addMapping("/api/*");
+        restServlet.addMapping("/*");
         
         // Register the CXF Servlet for SOAP
         CXFServlet cxfServlet = new CXFServlet();
