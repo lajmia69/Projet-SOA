@@ -1,1 +1,5 @@
 0:0:0:0:0:0:0:1 - - [28/Nov/2025:22:42:24 +0100] "GET /e_library/api/elibrary/health HTTP/1.1" 404 949 http-bio-8080-exec-1 54
+0:0:0:0:0:0:0:1 - - [28/Nov/2025:22:53:02 +0100] "GET /e_library/api/elibrary/health HTTP/1.1" 200 73 http-bio-8080-exec-1 98
+0:0:0:0:0:0:0:1 - - [28/Nov/2025:22:53:02 +0100] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-3 0
+127.0.0.1 - - [28/Nov/2025:22:54:19 +0100] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-5 0
+127.0.0.1 - - [28/Nov/2025:22:54:24 +0100] "GET / HTTP/1.1" 404 - http-bio-8080-exec-8 0
