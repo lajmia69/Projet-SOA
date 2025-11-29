@@ -8,6 +8,7 @@ e_library\model\ELibrary.class
 e_library\service\XMLParserService$2.class
 e_library\model\EducationLevel$Grade.class
 e_library\soap\ELibrarySOAPService.class
+e_library\rest\TestController.class
 e_library\model\EducationLevel$Field.class
 e_library\service\XMLParserService$7.class
 e_library\model\EducationLevel$Specialization.class

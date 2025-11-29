@@ -233,6 +233,16 @@
       margin: 20px auto;
     }
 
+    .debug-info {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -325,6 +335,8 @@
           <option value="">-- All Fields --</option>
         </select>
       </div>
+
+      <div class="debug-info" id="debugInfo"></div>
     </div>
 
     <div class="books-section" id="booksSection" style="display: none;">
@@ -367,6 +379,7 @@
     const booksGrid = document.getElementById('booksGrid');
     const sectionTitle = document.getElementById('sectionTitle');
     const booksCount = document.getElementById('booksCount');
+    const debugInfo = document.getElementById('debugInfo');
 
     let currentLevelData = null;
     let allBooks = [];
@@ -420,23 +433,45 @@
 
     async function loadEducationLevelData(levelCode) {
       try {
+        console.log('Loading education level data for:', levelCode);
+        
         // Load the complete education level data
-        const response = await fetch(`/api/elibrary/education-levels/${levelCode}`);
+        const url = `/api/elibrary/education-levels/${levelCode}`;
+        console.log('Fetching from URL:', url);
+        
+        const response = await fetch(url);
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
         
         if (!response.ok) {
-          throw new Error('Failed to load education level data');
+          const errorText = await response.text();
+          console.error('Error response:', errorText);
+          throw new Error(`Failed to load education level data: ${response.status} - ${errorText}`);
         }
         
-        currentLevelData = await response.json();
-        allBooks = currentLevelData.books || [];
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
         
-        // Reset filters
+        currentLevelData = JSON.parse(responseText);
+        console.log('Parsed education level data:', currentLevelData);
+        console.log('Specializations in response:', currentLevelData.specializations);
+        
+        allBooks = currentLevelData.books || [];
+        console.log('Total books:', allBooks.length);
+        
+        // Reset all filters
         gradeSelect.innerHTML = '<option value="">-- All Grades --</option>';
         specializationSelect.innerHTML = '<option value="">-- All Specializations --</option>';
         fieldSelect.innerHTML = '<option value="">-- All Fields --</option>';
         
+        // Hide all filter groups initially
+        gradeGroup.style.display = 'none';
+        specializationGroup.style.display = 'none';
+        fieldGroup.style.display = 'none';
+        
         // Show grade filter if grades exist
         if (currentLevelData.grades && currentLevelData.grades.length > 0) {
+          console.log('Found grades:', currentLevelData.grades.length);
           gradeGroup.style.display = 'block';
           currentLevelData.grades.forEach(grade => {
             const option = document.createElement('option');
@@ -444,25 +479,25 @@
             option.textContent = grade.value;
             gradeSelect.appendChild(option);
           });
-        } else {
-          gradeGroup.style.display = 'none';
         }
         
         // Show specialization filter if specializations exist
         if (currentLevelData.specializations && currentLevelData.specializations.length > 0) {
+          console.log('Found specializations:', currentLevelData.specializations.length);
+          console.log('Specializations:', currentLevelData.specializations);
           specializationGroup.style.display = 'block';
           currentLevelData.specializations.forEach(spec => {
             const option = document.createElement('option');
             option.value = spec.code;
             option.textContent = spec.value;
             specializationSelect.appendChild(option);
+            console.log('Added specialization:', spec.code, spec.value);
           });
-        } else {
-          specializationGroup.style.display = 'none';
         }
         
         // Show field filter if fields exist
         if (currentLevelData.fields && currentLevelData.fields.length > 0) {
+          console.log('Found fields:', currentLevelData.fields.length);
           fieldGroup.style.display = 'block';
           currentLevelData.fields.forEach(field => {
             const option = document.createElement('option');
@@ -470,9 +505,18 @@
             option.textContent = field.value;
             fieldSelect.appendChild(option);
           });
-        } else {
-          fieldGroup.style.display = 'none';
         }
+        
+        // Debug info
+        debugInfo.style.display = 'block';
+        debugInfo.innerHTML = `
+          <strong>Debug Info:</strong><br>
+          Level Code: ${levelCode}<br>
+          Grades: ${currentLevelData.grades ? currentLevelData.grades.length : 0}<br>
+          Specializations: ${currentLevelData.specializations ? currentLevelData.specializations.length : 0}<br>
+          Fields: ${currentLevelData.fields ? currentLevelData.fields.length : 0}<br>
+          Books: ${allBooks.length}
+        `;
         
         // Display all books initially
         filterAndDisplayBooks();
@@ -490,6 +534,8 @@
       const selectedSpecialization = specializationSelect.value;
       const selectedField = fieldSelect.value;
       
+      console.log('Filtering with:', { selectedGrade, selectedSpecialization, selectedField });
+      
       let filteredBooks = allBooks;
       
       // Filter by grade
@@ -497,16 +543,22 @@
         filteredBooks = filteredBooks.filter(book => 
           book.grade && book.grade.toString() === selectedGrade
         );
+        console.log('After grade filter:', filteredBooks.length);
       }
       
       // Filter by specialization
       if (selectedSpecialization) {
-        filteredBooks = filteredBooks.filter(book => book.specialization === selectedSpecialization);
+        filteredBooks = filteredBooks.filter(book => {
+          console.log('Book specialization:', book.specialization, 'Selected:', selectedSpecialization);
+          return book.specialization === selectedSpecialization;
+        });
+        console.log('After specialization filter:', filteredBooks.length);
       }
       
       // Filter by field
       if (selectedField) {
         filteredBooks = filteredBooks.filter(book => book.field === selectedField);
+        console.log('After field filter:', filteredBooks.length);
       }
       
       // Build title
@@ -541,45 +593,6 @@
         const bookCard = createBookCard(book, index);
         booksGrid.appendChild(bookCard);
       });
-    }
-
-    async function loadBooks(levelCode) {
-      booksSection.style.display = 'block';
-      booksGrid.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading books...</p></div>';
-      
-      try {
-        console.log('Fetching books for level:', levelCode);
-        const response = await fetch(`/api/elibrary/books/education-level/${levelCode}`);
-        
-        console.log('Response status:', response.status);
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('Error response:', errorText);
-          throw new Error(`Failed to load books: ${response.status} - ${errorText}`);
-        }
-        
-        const books = await response.json();
-        console.log('Books loaded:', books.length);
-        
-        const levelName = levelSelect.options[levelSelect.selectedIndex].text;
-        sectionTitle.textContent = `Books for ${levelName}`;
-        booksCount.textContent = `${books.length} book${books.length !== 1 ? 's' : ''} found`;
-        
-        if (books.length === 0) {
-          booksGrid.innerHTML = '<div class="no-books">No books available for this education level yet.</div>';
-          return;
-        }
-        
-        booksGrid.innerHTML = '';
-        books.forEach((book, index) => {
-          const bookCard = createBookCard(book, index);
-          booksGrid.appendChild(bookCard);
-        });
-      } catch (error) {
-        console.error('Error loading books:', error);
-        booksGrid.innerHTML = `<div class="no-books">Error loading books: ${error.message}<br><br>Please check the browser console (F12) for details.</div>`;
-      }
     }
 
     function createBookCard(book, index) {
@@ -650,7 +663,6 @@
 
     function openBook(book) {
       // Construct the PDF path based on book ID
-      // PDFs should be placed in: src/main/webapp/books/
       const pdfPath = `/books/${book.id}.pdf`;
       
       // Try to open the PDF in a new tab
