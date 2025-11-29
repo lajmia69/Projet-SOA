@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/elibrary")
+@RequestMapping("/elibrary")  // Changed from "/api/elibrary" to "/elibrary"
 @CrossOrigin(origins = "*")
 public class ELibraryRESTController {
 
@@ -38,54 +38,10 @@ public class ELibraryRESTController {
     // Get education level by code
     @GetMapping(value = "/education-levels/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EducationLevel> getEducationLevelByCode(@PathVariable String code) {
-        System.out.println("=== GET /elibrary/education-levels/" + code + " ===");
-        
         EducationLevel level = xmlParserService.getEducationLevelByCode(code);
-        
         if (level != null) {
-            System.out.println("Found education level: " + level.getName());
-            System.out.println("ID: " + level.getId());
-            System.out.println("Code: " + level.getCode());
-            System.out.println("Duration: " + level.getDuration());
-            
-            if (level.getGrades() != null) {
-                System.out.println("Grades count: " + level.getGrades().size());
-                for (EducationLevel.Grade g : level.getGrades()) {
-                    System.out.println("  - Grade " + g.getNumber() + ": " + g.getValue());
-                }
-            } else {
-                System.out.println("Grades: null");
-            }
-            
-            if (level.getSpecializations() != null) {
-                System.out.println("Specializations count: " + level.getSpecializations().size());
-                for (EducationLevel.Specialization s : level.getSpecializations()) {
-                    System.out.println("  - Spec " + s.getCode() + ": " + s.getValue());
-                }
-            } else {
-                System.out.println("Specializations: null");
-            }
-            
-            if (level.getFields() != null) {
-                System.out.println("Fields count: " + level.getFields().size());
-                for (EducationLevel.Field f : level.getFields()) {
-                    System.out.println("  - Field " + f.getCode() + ": " + f.getValue());
-                }
-            } else {
-                System.out.println("Fields: null");
-            }
-            
-            if (level.getBooks() != null) {
-                System.out.println("Books count: " + level.getBooks().size());
-            } else {
-                System.out.println("Books: null");
-            }
-            
-            System.out.println("=== Returning education level ===");
             return ResponseEntity.ok(level);
         }
-        
-        System.out.println("Education level NOT FOUND: " + code);
         return ResponseEntity.notFound().build();
     }
 

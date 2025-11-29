@@ -7,7 +7,7 @@
 
     <display-name>E-Library Application</display-name>
 
-    <!-- Spring Root Context Configuration -->
+    <!-- Spring Context Configuration -->
     <context-param>
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
@@ -15,7 +15,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>e_library.config.CXFConfig</param-value>
+        <param-value>e_library.config.SpringConfig,e_library.config.CXFConfig</param-value>
     </context-param>
 
     <!-- Spring Context Loader Listener -->
