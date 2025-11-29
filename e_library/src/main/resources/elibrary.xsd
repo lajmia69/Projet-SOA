@@ -33,6 +33,8 @@
             <xs:enumeration value="PRIMARY"/>
             <xs:enumeration value="PREPARATORY"/>
             <xs:enumeration value="SECONDARY"/>
+            <xs:enumeration value="PREP_ENG"/>
+            <xs:enumeration value="ENGINEERING"/>
             <xs:enumeration value="LICENCE"/>
             <xs:enumeration value="MASTER"/>
             <xs:enumeration value="DOCTORATE"/>
@@ -118,6 +120,7 @@
             <xs:element name="language" type="LanguageType"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="grade" type="xs:positiveInteger" use="optional"/>
         <xs:attribute name="specialization" type="xs:string" use="optional"/>
         <xs:attribute name="field" type="xs:string" use="optional"/>
         <xs:attribute name="type" type="xs:string" use="optional"/>

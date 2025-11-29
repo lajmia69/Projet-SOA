@@ -1,73 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>E-Library — Dev Landing</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tunisian E-Library System</title>
   <style>
-    body{font-family:Segoe UI,Arial,Helvetica,sans-serif;max-width:960px;margin:40px auto;color:#222}
-    header{display:flex;align-items:center;gap:16px}
-    h1{margin:0;font-size:1.6rem}
-    .card{border:1px solid #e0e0e0;padding:16px;margin:16px 0;border-radius:6px}
-    button{padding:8px 12px;border-radius:4px;border:1px solid #ccc;background:#f7f7f7}
-    pre{background:#f3f3f3;padding:12px;border-radius:4px;overflow:auto}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .filter-section {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    select:hover {
+      border-color: #667eea;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .books-section {
+      animation: fadeIn 1s ease-in;
+    }
+
+    .books-header {
+      color: white;
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
+
+    .books-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .books-count {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .book-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .book-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .book-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .book-meta-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .book-meta-item strong {
+      color: #667eea;
+      min-width: 80px;
+    }
+
+    .book-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tag {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .no-books {
+      text-align: center;
+      color: white;
+      font-size: 1.3rem;
+      padding: 60px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .loading {
+      text-align: center;
+      color: white;
+      font-size: 1.5rem;
+      padding: 60px 20px;
+    }
+
+    .spinner {
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .books-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>E-Library — Dev Landing</h1>
-    <small>Static UI for local development</small>
-  </header>
+  <div class="container">
+    <header>
+      <h1>📚 Welcome to the Tunisian E-Library</h1>
+      <p>Explore educational resources across all levels</p>
+    </header>
 
-  <div class="card">
-    <strong>Quick links</strong>
-    <ul>
-      <li><a href="/api/elibrary/books">/api/elibrary/books</a></li>
-      <li><a href="/api/elibrary/education-levels">/api/elibrary/education-levels</a></li>
-      <li><a href="/api/elibrary/statistics">/api/elibrary/statistics</a></li>
-      <li><a href="/soap/ELibraryService?wsdl">/soap/ELibraryService?wsdl</a> (SOAP WSDL)</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <strong>Health check</strong>
-    <div>
-      <button id="btn-health">Call /api/elibrary/health</button>
-      <pre id="health-result">Not called yet</pre>
-    </div>
-  </div>
-
-  <div class="card">
-    <strong>XPath tester</strong>
-    <div>
-      <textarea id="xpath" rows="3" style="width:100%;">/ELibrary/educationLevels/educationLevel</textarea>
-      <div style="margin-top:8px">
-        <button id="btn-xpath">Run XPath</button>
+    <div class="filter-section">
+      <div class="filter-group">
+        <label for="educationCategory">Select Education Category:</label>
+        <select id="educationCategory">
+          <option value="">-- Select Category --</option>
+          <option value="basic">Basic Education (Primary & Preparatory)</option>
+          <option value="secondary">Secondary Education (Lycée)</option>
+          <option value="higher">Higher Education (University)</option>
+        </select>
       </div>
-      <pre id="xpath-result">No result</pre>
+
+      <div class="filter-group" id="levelGroup" style="display: none;">
+        <label for="educationLevel">Select Education Level:</label>
+        <select id="educationLevel">
+          <option value="">-- Select Level --</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="books-section" id="booksSection" style="display: none;">
+      <div class="books-header">
+        <h2 id="sectionTitle">Available Books</h2>
+        <p class="books-count" id="booksCount">0 books found</p>
+      </div>
+      <div class="books-grid" id="booksGrid"></div>
+    </div>
+
+    <!-- Debug section -->
+    <div style="background: white; padding: 20px; border-radius: 15px; margin-top: 30px; font-size: 0.9rem;">
+      <h3 style="margin-bottom: 10px;">🔧 Debug Info</h3>
+      <button onclick="testAPI()" style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 10px;">Test API Connection</button>
+      <pre id="debugInfo" style="background: #f5f5f5; padding: 10px; border-radius: 5px; overflow: auto; max-height: 200px;">Click "Test API Connection" to check if the server is running...</pre>
     </div>
   </div>
 
   <script>
-    document.getElementById('btn-health').addEventListener('click', async ()=>{
-      try{
-        const r = await fetch('/api/elibrary/health');
-        const j = await r.json();
-        document.getElementById('health-result').textContent = JSON.stringify(j, null, 2);
-      }catch(e){ document.getElementById('health-result').textContent = String(e);}    
+    async function testAPI() {
+      const debugInfo = document.getElementById('debugInfo');
+      debugInfo.textContent = 'Testing API...\n\n';
+      
+      // Test 1: Health check
+      try {
+        debugInfo.textContent += '1. Testing /api/elibrary/health...\n';
+        const healthResp = await fetch('/api/elibrary/health');
+        debugInfo.textContent += `   Status: ${healthResp.status}\n`;
+        const healthData = await healthResp.json();
+        debugInfo.textContent += `   Response: ${JSON.stringify(healthData)}\n\n`;
+      } catch (e) {
+        debugInfo.textContent += `   ERROR: ${e.message}\n\n`;
+      }
+      
+      // Test 2: Get all education levels
+      try {
+        debugInfo.textContent += '2. Testing /api/elibrary/education-levels...\n';
+        const levelsResp = await fetch('/api/elibrary/education-levels');
+        debugInfo.textContent += `   Status: ${levelsResp.status}\n`;
+        const levelsData = await levelsResp.json();
+        debugInfo.textContent += `   Found ${levelsData.length} education levels\n\n`;
+      } catch (e) {
+        debugInfo.textContent += `   ERROR: ${e.message}\n\n`;
+      }
+      
+      // Test 3: Get books for PRIMARY
+      try {
+        debugInfo.textContent += '3. Testing /api/elibrary/books/education-level/PRIMARY...\n';
+        const booksResp = await fetch('/api/elibrary/books/education-level/PRIMARY');
+        debugInfo.textContent += `   Status: ${booksResp.status}\n`;
+        const booksData = await booksResp.json();
+        debugInfo.textContent += `   Found ${booksData.length} books\n`;
+        if (booksData.length > 0) {
+          debugInfo.textContent += `   First book: ${booksData[0].title}\n`;
+        }
+      } catch (e) {
+        debugInfo.textContent += `   ERROR: ${e.message}\n`;
+      }
+    }
+    
+    const educationLevels = {
+      basic: [
+        { code: 'PRIMARY', name: 'Primary Education (Enseignement Primaire)' },
+        { code: 'PREPARATORY', name: 'Preparatory Education (Enseignement Préparatoire)' }
+      ],
+      secondary: [
+        { code: 'SECONDARY', name: 'Secondary Education (Enseignement Secondaire)' }
+      ],
+      higher: [
+        { code: 'LICENCE', name: 'Bachelor / Licence' },
+        { code: 'MASTER', name: 'Master / Mastère' },
+        { code: 'DOCTORATE', name: 'Doctorate / Doctorat' }
+      ]
+    };
+
+    const categorySelect = document.getElementById('educationCategory');
+    const levelGroup = document.getElementById('levelGroup');
+    const levelSelect = document.getElementById('educationLevel');
+    const booksSection = document.getElementById('booksSection');
+    const booksGrid = document.getElementById('booksGrid');
+    const sectionTitle = document.getElementById('sectionTitle');
+    const booksCount = document.getElementById('booksCount');
+
+    categorySelect.addEventListener('change', function() {
+      const category = this.value;
+      levelSelect.innerHTML = '<option value="">-- Select Level --</option>';
+      
+      if (category) {
+        levelGroup.style.display = 'block';
+        const levels = educationLevels[category];
+        levels.forEach(level => {
+          const option = document.createElement('option');
+          option.value = level.code;
+          option.textContent = level.name;
+          levelSelect.appendChild(option);
+        });
+      } else {
+        levelGroup.style.display = 'none';
+        booksSection.style.display = 'none';
+      }
     });
 
-    document.getElementById('btn-xpath').addEventListener('click', async ()=>{
-      const query = document.getElementById('xpath').value;
-      try{
-        const r = await fetch('/api/elibrary/xpath',{
-          method:'POST',headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({query})
-        });
-        const j = await r.json();
-        document.getElementById('xpath-result').textContent = JSON.stringify(j, null, 2);
-      }catch(e){ document.getElementById('xpath-result').textContent = String(e);}
+    levelSelect.addEventListener('change', function() {
+      const levelCode = this.value;
+      if (levelCode) {
+        loadBooks(levelCode);
+      } else {
+        booksSection.style.display = 'none';
+      }
     });
+
+    async function loadBooks(levelCode) {
+      booksSection.style.display = 'block';
+      booksGrid.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading books...</p></div>';
+      
+      try {
+        console.log('Fetching books for level:', levelCode);
+        const response = await fetch(`/api/elibrary/books/education-level/${levelCode}`);
+        
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Error response:', errorText);
+          throw new Error(`Failed to load books: ${response.status} - ${errorText}`);
+        }
+        
+        const books = await response.json();
+        console.log('Books loaded:', books.length);
+        
+        const levelName = levelSelect.options[levelSelect.selectedIndex].text;
+        sectionTitle.textContent = `Books for ${levelName}`;
+        booksCount.textContent = `${books.length} book${books.length !== 1 ? 's' : ''} found`;
+        
+        if (books.length === 0) {
+          booksGrid.innerHTML = '<div class="no-books">No books available for this education level yet.</div>';
+          return;
+        }
+        
+        booksGrid.innerHTML = '';
+        books.forEach((book, index) => {
+          const bookCard = createBookCard(book, index);
+          booksGrid.appendChild(bookCard);
+        });
+      } catch (error) {
+        console.error('Error loading books:', error);
+        booksGrid.innerHTML = `<div class="no-books">Error loading books: ${error.message}<br><br>Please check the browser console (F12) for details.</div>`;
+      }
+    }
+
+    function createBookCard(book, index) {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      card.style.animationDelay = `${index * 0.1}s`;
+      
+      const title = document.createElement('div');
+      title.className = 'book-title';
+      title.textContent = book.title;
+      
+      const meta = document.createElement('div');
+      meta.className = 'book-meta';
+      
+      const metaItems = [
+        { label: 'Author', value: book.author },
+        { label: 'Subject', value: book.subject },
+        { label: 'ISBN', value: book.isbn },
+        { label: 'Year', value: book.publicationYear }
+      ];
+      
+      metaItems.forEach(item => {
+        if (item.value) {
+          const metaItem = document.createElement('div');
+          metaItem.className = 'book-meta-item';
+          metaItem.innerHTML = `<strong>${item.label}:</strong> <span>${item.value}</span>`;
+          meta.appendChild(metaItem);
+        }
+      });
+      
+      const tags = document.createElement('div');
+      tags.className = 'book-tags';
+      
+      const tagData = [
+        book.language,
+        book.format,
+        book.field,
+        book.specialization,
+        book.type
+      ].filter(Boolean);
+      
+      tagData.forEach(tagText => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = tagText;
+        tags.appendChild(tag);
+      });
+      
+      card.appendChild(title);
+      card.appendChild(meta);
+      if (tagData.length > 0) {
+        card.appendChild(tags);
+      }
+      
+      return card;
+    }
   </script>
 </body>
 </html>

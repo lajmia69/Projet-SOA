@@ -1,144 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>E-Library — Dev Landing</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tunisian E-Library System</title>
   <style>
-    body{font-family:Segoe UI,Arial,Helvetica,sans-serif;max-width:960px;margin:40px auto;color:#222}
-    header{display:flex;align-items:center;gap:16px}
-    h1{margin:0;font-size:1.6rem}
-    .card{border:1px solid #e0e0e0;padding:16px;margin:16px 0;border-radius:6px}
-    button{padding:8px 12px;border-radius:4px;border:1px solid #ccc;background:#f7f7f7}
-    pre{background:#f3f3f3;padding:12px;border-radius:4px;overflow:auto}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .filter-section {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    select:hover {
+      border-color: #667eea;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .books-section {
+      animation: fadeIn 1s ease-in;
+    }
+
+    .books-header {
+      color: white;
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
+
+    .books-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .books-count {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .book-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .book-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .book-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .book-meta-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .book-meta-item strong {
+      color: #667eea;
+      min-width: 80px;
+    }
+
+    .book-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tag {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .book-actions {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-download {
+      flex: 1;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-download:active {
+      transform: translateY(0);
+    }
+
+    .btn-download:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .no-books {
+      text-align: center;
+      color: white;
+      font-size: 1.3rem;
+      padding: 60px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .loading {
+      text-align: center;
+      color: white;
+      font-size: 1.5rem;
+      padding: 60px 20px;
+    }
+
+    .spinner {
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .books-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>E-Library — Dev Landing</h1>
-    <small>Static UI for local development</small>
-  </header>
+  <div class="container">
+    <header>
+      <h1>📚 Welcome to the Tunisian E-Library</h1>
+      <p>Explore educational resources across all levels</p>
+    </header>
 
-  <div class="card">
-    <strong>Quick links</strong>
-    <ul>
-      <li><a href="/api/elibrary/books">/api/elibrary/books</a></li>
-      <li><a href="/api/elibrary/education-levels">/api/elibrary/education-levels</a></li>
-      <li><a href="/api/elibrary/statistics">/api/elibrary/statistics</a></li>
-      <li><a href="/soap/ELibraryService?wsdl">/soap/ELibraryService?wsdl</a> (SOAP WSDL)</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <strong>Health check</strong>
-    <div>
-      <button id="btn-health">Call /api/elibrary/health</button>
-      <pre id="health-result">Not called yet</pre>
-    </div>
-  </div>
-
-  <div class="card">
-    <strong>XPath tester</strong>
-    <div>
-      <textarea id="xpath" rows="3" style="width:100%;">/ELibrary/educationLevels/educationLevel</textarea>
-      <div style="margin-top:8px">
-        <button id="btn-xpath">Run XPath</button>
+    <div class="filter-section">
+      <div class="filter-group">
+        <label for="educationCategory">Select Education Category:</label>
+        <select id="educationCategory">
+          <option value="">-- Select Category --</option>
+          <option value="basic">Basic Education (Primary & Preparatory)</option>
+          <option value="secondary">Secondary Education (Lycée)</option>
+          <option value="higher">Higher Education (University)</option>
+        </select>
       </div>
-      <pre id="xpath-result">No result</pre>
-    </div>
-  </div>
 
-  <div class="card">
-    <strong>Books</strong>
-    <div>
-      <button id="btn-load-books">Load books</button>
-      <div id="books-container" style="margin-top:12px">
-        <em>Books will appear here after loading.</em>
+      <div class="filter-group" id="levelGroup" style="display: none;">
+        <label for="educationLevel">Select Education Level:</label>
+        <select id="educationLevel">
+          <option value="">-- Select Level --</option>
+        </select>
       </div>
-      <pre id="book-detail" style="margin-top:12px;display:none"></pre>
+
+      <div class="filter-group" id="gradeGroup" style="display: none;">
+        <label for="gradeSelect">Select Grade/Year:</label>
+        <select id="gradeSelect">
+          <option value="">-- All Grades --</option>
+        </select>
+      </div>
+
+      <div class="filter-group" id="specializationGroup" style="display: none;">
+        <label for="specializationSelect">Select Specialization:</label>
+        <select id="specializationSelect">
+          <option value="">-- All Specializations --</option>
+        </select>
+      </div>
+
+      <div class="filter-group" id="fieldGroup" style="display: none;">
+        <label for="fieldSelect">Select Field:</label>
+        <select id="fieldSelect">
+          <option value="">-- All Fields --</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="books-section" id="booksSection" style="display: none;">
+      <div class="books-header">
+        <h2 id="sectionTitle">Available Books</h2>
+        <p class="books-count" id="booksCount">0 books found</p>
+      </div>
+      <div class="books-grid" id="booksGrid"></div>
     </div>
   </div>
 
   <script>
-    document.getElementById('btn-health').addEventListener('click', async ()=>{
-      try{
-        const r = await fetch('/api/elibrary/health');
-        const text = await r.text();
-        try {
-          const j = JSON.parse(text);
-          document.getElementById('health-result').textContent = JSON.stringify(j, null, 2);
-        } catch (e) {
-          document.getElementById('health-result').textContent = text;
+    const educationLevels = {
+      basic: [
+        { code: 'PRIMARY', name: 'Primary Education (Enseignement Primaire)' },
+        { code: 'PREPARATORY', name: 'Preparatory Education (Enseignement Préparatoire)' }
+      ],
+      secondary: [
+        { code: 'SECONDARY', name: 'Secondary Education (Enseignement Secondaire)' }
+      ],
+      higher: [
+        { code: 'PREP_ENG', name: 'Preparatory Engineering School (Classes Préparatoires)' },
+        { code: 'ENGINEERING', name: 'Engineering School (École d\'Ingénieurs)' },
+        { code: 'LICENCE', name: 'Bachelor / Licence' },
+        { code: 'MASTER', name: 'Master / Mastère' },
+        { code: 'DOCTORATE', name: 'Doctorate / Doctorat' }
+      ]
+    };
+
+    const categorySelect = document.getElementById('educationCategory');
+    const levelGroup = document.getElementById('levelGroup');
+    const levelSelect = document.getElementById('educationLevel');
+    const gradeGroup = document.getElementById('gradeGroup');
+    const gradeSelect = document.getElementById('gradeSelect');
+    const specializationGroup = document.getElementById('specializationGroup');
+    const specializationSelect = document.getElementById('specializationSelect');
+    const fieldGroup = document.getElementById('fieldGroup');
+    const fieldSelect = document.getElementById('fieldSelect');
+    const booksSection = document.getElementById('booksSection');
+    const booksGrid = document.getElementById('booksGrid');
+    const sectionTitle = document.getElementById('sectionTitle');
+    const booksCount = document.getElementById('booksCount');
+
+    let currentLevelData = null;
+    let allBooks = [];
+
+    categorySelect.addEventListener('change', function() {
+      const category = this.value;
+      levelSelect.innerHTML = '<option value="">-- Select Level --</option>';
+      gradeGroup.style.display = 'none';
+      specializationGroup.style.display = 'none';
+      fieldGroup.style.display = 'none';
+      booksSection.style.display = 'none';
+      
+      if (category) {
+        levelGroup.style.display = 'block';
+        const levels = educationLevels[category];
+        levels.forEach(level => {
+          const option = document.createElement('option');
+          option.value = level.code;
+          option.textContent = level.name;
+          levelSelect.appendChild(option);
+        });
+      } else {
+        levelGroup.style.display = 'none';
+      }
+    });
+
+    levelSelect.addEventListener('change', async function() {
+      const levelCode = this.value;
+      gradeGroup.style.display = 'none';
+      specializationGroup.style.display = 'none';
+      fieldGroup.style.display = 'none';
+      
+      if (levelCode) {
+        await loadEducationLevelData(levelCode);
+      } else {
+        booksSection.style.display = 'none';
+      }
+    });
+
+    gradeSelect.addEventListener('change', function() {
+      filterAndDisplayBooks();
+    });
+
+    specializationSelect.addEventListener('change', function() {
+      filterAndDisplayBooks();
+    });
+
+    fieldSelect.addEventListener('change', function() {
+      filterAndDisplayBooks();
+    });
+
+    async function loadEducationLevelData(levelCode) {
+      try {
+        // Load the complete education level data
+        const response = await fetch(`/api/elibrary/education-levels/${levelCode}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to load education level data');
         }
-      }catch(e){ document.getElementById('health-result').textContent = String(e);}    
-    });
-
-    document.getElementById('btn-xpath').addEventListener('click', async ()=>{
-      const query = document.getElementById('xpath').value;
-      try{
-        const r = await fetch('/api/elibrary/xpath',{
-          method:'POST',headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({query})
-        });
-        const text = await r.text();
-        try { document.getElementById('xpath-result').textContent = JSON.stringify(JSON.parse(text), null, 2); }
-        catch(e) { document.getElementById('xpath-result').textContent = text; }
-      }catch(e){ document.getElementById('xpath-result').textContent = String(e);}
-    });
-
-    // Books UI
-    async function loadBooks(){
-      const container = document.getElementById('books-container');
-      container.textContent = 'Loading...';
-      try{
-        const r = await fetch('/api/elibrary/books');
-        const text = await r.text();
-        let data;
-        try{ data = JSON.parse(text); } catch(e){ container.textContent = 'Failed to parse JSON: '+text; return; }
-
-        if(!Array.isArray(data) || data.length===0){ container.innerHTML = '<em>No books found.</em>'; return; }
-
-        const ul = document.createElement('ul');
-        ul.style.listStyle='none';
-        ul.style.padding='0';
-        data.forEach(b=>{
-          const li = document.createElement('li');
-          li.style.padding='8px 0';
-          const title = document.createElement('strong');
-          title.textContent = b.title || '[no title]';
-          const meta = document.createElement('div');
-          meta.style.fontSize='0.9em';
-          meta.style.color='#444';
-          meta.textContent = (b.author?('by '+b.author):'') + (b.publicationYear?(' • '+b.publicationYear):'') + (b.field?(' • '+b.field):'');
-          const view = document.createElement('button');
-          view.textContent = 'View';
-          view.style.marginLeft='12px';
-          view.addEventListener('click', ()=> showBookDetail(b.id));
-          li.appendChild(title);
-          li.appendChild(view);
-          li.appendChild(meta);
-          ul.appendChild(li);
-        });
-        container.innerHTML='';
-        container.appendChild(ul);
-      }catch(e){ document.getElementById('books-container').textContent = String(e); }
+        
+        currentLevelData = await response.json();
+        allBooks = currentLevelData.books || [];
+        
+        // Reset filters
+        gradeSelect.innerHTML = '<option value="">-- All Grades --</option>';
+        specializationSelect.innerHTML = '<option value="">-- All Specializations --</option>';
+        fieldSelect.innerHTML = '<option value="">-- All Fields --</option>';
+        
+        // Show grade filter if grades exist
+        if (currentLevelData.grades && currentLevelData.grades.length > 0) {
+          gradeGroup.style.display = 'block';
+          currentLevelData.grades.forEach(grade => {
+            const option = document.createElement('option');
+            option.value = grade.number;
+            option.textContent = grade.value;
+            gradeSelect.appendChild(option);
+          });
+        } else {
+          gradeGroup.style.display = 'none';
+        }
+        
+        // Show specialization filter if specializations exist
+        if (currentLevelData.specializations && currentLevelData.specializations.length > 0) {
+          specializationGroup.style.display = 'block';
+          currentLevelData.specializations.forEach(spec => {
+            const option = document.createElement('option');
+            option.value = spec.code;
+            option.textContent = spec.value;
+            specializationSelect.appendChild(option);
+          });
+        } else {
+          specializationGroup.style.display = 'none';
+        }
+        
+        // Show field filter if fields exist
+        if (currentLevelData.fields && currentLevelData.fields.length > 0) {
+          fieldGroup.style.display = 'block';
+          currentLevelData.fields.forEach(field => {
+            const option = document.createElement('option');
+            option.value = field.code;
+            option.textContent = field.value;
+            fieldSelect.appendChild(option);
+          });
+        } else {
+          fieldGroup.style.display = 'none';
+        }
+        
+        // Display all books initially
+        filterAndDisplayBooks();
+        
+      } catch (error) {
+        console.error('Error loading education level data:', error);
+        booksGrid.innerHTML = `<div class="no-books">Error loading data: ${error.message}<br><br>Please check the browser console (F12) for details.</div>`;
+      }
     }
 
-    async function showBookDetail(id){
-      const detail = document.getElementById('book-detail');
-      detail.style.display='block';
-      detail.textContent = 'Loading...';
-      try{
-        const r = await fetch('/api/elibrary/books/'+encodeURIComponent(id));
-        const text = await r.text();
-        try{ const j = JSON.parse(text); detail.textContent = JSON.stringify(j, null, 2); }
-        catch(e){ detail.textContent = text; }
-      }catch(e){ detail.textContent = String(e); }
+    function filterAndDisplayBooks() {
+      booksSection.style.display = 'block';
+      
+      const selectedGrade = gradeSelect.value;
+      const selectedSpecialization = specializationSelect.value;
+      const selectedField = fieldSelect.value;
+      
+      let filteredBooks = allBooks;
+      
+      // Filter by grade
+      if (selectedGrade) {
+        filteredBooks = filteredBooks.filter(book => 
+          book.grade && book.grade.toString() === selectedGrade
+        );
+      }
+      
+      // Filter by specialization
+      if (selectedSpecialization) {
+        filteredBooks = filteredBooks.filter(book => book.specialization === selectedSpecialization);
+      }
+      
+      // Filter by field
+      if (selectedField) {
+        filteredBooks = filteredBooks.filter(book => book.field === selectedField);
+      }
+      
+      // Build title
+      const levelName = levelSelect.options[levelSelect.selectedIndex].text;
+      let titleParts = [levelName];
+      
+      if (selectedGrade && gradeGroup.style.display !== 'none') {
+        const gradeName = gradeSelect.options[gradeSelect.selectedIndex].text;
+        titleParts.push(gradeName);
+      }
+      
+      if (selectedSpecialization) {
+        const specName = specializationSelect.options[specializationSelect.selectedIndex].text;
+        titleParts.push(specName);
+      }
+      
+      if (selectedField) {
+        const fieldName = fieldSelect.options[fieldSelect.selectedIndex].text;
+        titleParts.push(fieldName);
+      }
+      
+      sectionTitle.textContent = `Books for ${titleParts.join(' - ')}`;
+      booksCount.textContent = `${filteredBooks.length} book${filteredBooks.length !== 1 ? 's' : ''} found`;
+      
+      if (filteredBooks.length === 0) {
+        booksGrid.innerHTML = '<div class="no-books">No books available for the selected criteria.</div>';
+        return;
+      }
+      
+      booksGrid.innerHTML = '';
+      filteredBooks.forEach((book, index) => {
+        const bookCard = createBookCard(book, index);
+        booksGrid.appendChild(bookCard);
+      });
     }
 
-    document.getElementById('btn-load-books').addEventListener('click', loadBooks);
-    // auto-load on page open
-    loadBooks();
+    async function loadBooks(levelCode) {
+      booksSection.style.display = 'block';
+      booksGrid.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading books...</p></div>';
+      
+      try {
+        console.log('Fetching books for level:', levelCode);
+        const response = await fetch(`/api/elibrary/books/education-level/${levelCode}`);
+        
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Error response:', errorText);
+          throw new Error(`Failed to load books: ${response.status} - ${errorText}`);
+        }
+        
+        const books = await response.json();
+        console.log('Books loaded:', books.length);
+        
+        const levelName = levelSelect.options[levelSelect.selectedIndex].text;
+        sectionTitle.textContent = `Books for ${levelName}`;
+        booksCount.textContent = `${books.length} book${books.length !== 1 ? 's' : ''} found`;
+        
+        if (books.length === 0) {
+          booksGrid.innerHTML = '<div class="no-books">No books available for this education level yet.</div>';
+          return;
+        }
+        
+        booksGrid.innerHTML = '';
+        books.forEach((book, index) => {
+          const bookCard = createBookCard(book, index);
+          booksGrid.appendChild(bookCard);
+        });
+      } catch (error) {
+        console.error('Error loading books:', error);
+        booksGrid.innerHTML = `<div class="no-books">Error loading books: ${error.message}<br><br>Please check the browser console (F12) for details.</div>`;
+      }
+    }
+
+    function createBookCard(book, index) {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      card.style.animationDelay = `${index * 0.1}s`;
+      
+      const title = document.createElement('div');
+      title.className = 'book-title';
+      title.textContent = book.title;
+      
+      const meta = document.createElement('div');
+      meta.className = 'book-meta';
+      
+      const metaItems = [
+        { label: 'Author', value: book.author },
+        { label: 'Subject', value: book.subject },
+        { label: 'ISBN', value: book.isbn },
+        { label: 'Year', value: book.publicationYear }
+      ];
+      
+      metaItems.forEach(item => {
+        if (item.value) {
+          const metaItem = document.createElement('div');
+          metaItem.className = 'book-meta-item';
+          metaItem.innerHTML = `<strong>${item.label}:</strong> <span>${item.value}</span>`;
+          meta.appendChild(metaItem);
+        }
+      });
+      
+      const tags = document.createElement('div');
+      tags.className = 'book-tags';
+      
+      const tagData = [
+        book.language,
+        book.format,
+        book.field,
+        book.specialization,
+        book.type
+      ].filter(Boolean);
+      
+      tagData.forEach(tagText => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = tagText;
+        tags.appendChild(tag);
+      });
+      
+      // Add download button
+      const actions = document.createElement('div');
+      actions.className = 'book-actions';
+      
+      const downloadBtn = document.createElement('button');
+      downloadBtn.className = 'btn-download';
+      downloadBtn.innerHTML = '📥 Open/Download Book';
+      downloadBtn.onclick = () => openBook(book);
+      actions.appendChild(downloadBtn);
+      
+      card.appendChild(title);
+      card.appendChild(meta);
+      if (tagData.length > 0) {
+        card.appendChild(tags);
+      }
+      card.appendChild(actions);
+      
+      return card;
+    }
+
+    function openBook(book) {
+      // Construct the PDF path based on book ID
+      // PDFs should be placed in: src/main/webapp/books/
+      const pdfPath = `/books/${book.id}.pdf`;
+      
+      // Try to open the PDF in a new tab
+      const link = document.createElement('a');
+      link.href = pdfPath;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      
+      // Check if file exists before opening
+      fetch(pdfPath, { method: 'HEAD' })
+        .then(response => {
+          if (response.ok) {
+            link.click();
+          } else {
+            alert(`PDF file not found for "${book.title}".\n\nPlease place the PDF file at:\n${pdfPath}\n\nFile should be named: ${book.id}.pdf`);
+          }
+        })
+        .catch(() => {
+          alert(`PDF file not found for "${book.title}".\n\nPlease place the PDF file at:\nsrc/main/webapp/books/${book.id}.pdf`);
+        });
+    }
   </script>
 </body>
 </html>

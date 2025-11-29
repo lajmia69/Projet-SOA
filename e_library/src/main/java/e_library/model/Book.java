@@ -17,6 +17,9 @@ public class Book {
     @XmlAttribute(name = "id", required = true)
     private String id;
 
+    @XmlAttribute(name = "grade")
+    private Integer grade;
+
     @XmlAttribute(name = "specialization")
     private String specialization;
 

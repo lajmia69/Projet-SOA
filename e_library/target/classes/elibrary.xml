@@ -15,7 +15,7 @@
             <grade number="6">6ème année primaire</grade>
         </grades>
         <books>
-            <book id="B001">
+            <book id="B001" grade="1">
                 <title>القراءة العربية للسنة الأولى</title>
                 <subject>Arabic Language</subject>
                 <author>وزارة التربية التونسية</author>
@@ -24,7 +24,7 @@
                 <format>PDF</format>
                 <language>Arabic</language>
             </book>
-            <book id="B002">
+            <book id="B002" grade="1">
                 <title>Mathématiques 1ère année</title>
                 <subject>Mathematics</subject>
                 <author>Ministère de l'Éducation</author>
@@ -33,7 +33,7 @@
                 <format>PDF</format>
                 <language>French</language>
             </book>
-            <book id="B003">
+            <book id="B003" grade="6">
                 <title>Sciences Naturelles 6ème année</title>
                 <subject>Natural Sciences</subject>
                 <author>Ahmed Ben Salem</author>
@@ -55,7 +55,7 @@
             <grade number="9">9ème année de base</grade>
         </grades>
         <books>
-            <book id="B004">
+            <book id="B004" grade="9">
                 <title>Physique-Chimie 9ème année</title>
                 <subject>Physics and Chemistry</subject>
                 <author>Mohamed Trabelsi</author>
@@ -64,7 +64,7 @@
                 <format>PDF</format>
                 <language>French</language>
             </book>
-            <book id="B005">
+            <book id="B005" grade="8">
                 <title>التاريخ والجغرافيا للسنة الثامنة</title>
                 <subject>History and Geography</subject>
                 <author>فاطمة بن عمر</author>
@@ -95,7 +95,7 @@
             <specialization code="INFO">Sciences de l'Informatique</specialization>
         </specializations>
         <books>
-            <book id="B006" specialization="MATH">
+            <book id="B006" grade="13" specialization="MATH">
                 <title>Analyse Mathématique - Bac Mathématiques</title>
                 <subject>Advanced Mathematics</subject>
                 <author>Hedi Lakhal</author>
@@ -104,7 +104,7 @@
                 <format>PDF</format>
                 <language>French</language>
             </book>
-            <book id="B007" specialization="SCI">
+            <book id="B007" grade="13" specialization="SCI">
                 <title>Biologie - Sciences Expérimentales</title>
                 <subject>Biology</subject>
                 <author>Salma Gharbi</author>
@@ -113,7 +113,7 @@
                 <format>EPUB</format>
                 <language>French</language>
             </book>
-            <book id="B008" specialization="INFO">
+            <book id="B008" grade="12" specialization="INFO">
                 <title>Programmation et Algorithmique</title>
                 <subject>Computer Science</subject>
                 <author>Karim Jebali</author>
@@ -122,11 +122,178 @@
                 <format>PDF</format>
                 <language>French</language>
             </book>
+            <book id="B020" grade="10">
+                <title>Introduction aux Sciences</title>
+                <subject>General Sciences</subject>
+                <author>Nadia Mansour</author>
+                <isbn>978-9973-125-10-0</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B021" grade="11" specialization="MATH">
+                <title>Algèbre et Géométrie</title>
+                <subject>Mathematics</subject>
+                <author>Kamel Toumi</author>
+                <isbn>978-9973-125-11-7</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Preparatory Engineering School (Classes Préparatoires) -->
+    <educationLevel id="L004" code="PREP_ENG">
+        <n>Classes Préparatoires aux Études d'Ingénieurs</n>
+        <duration>2 years</duration>
+        <grades>
+            <grade number="1">1ère année prépa</grade>
+            <grade number="2">2ème année prépa</grade>
+        </grades>
+        <specializations>
+            <specialization code="MP">Mathématiques et Physique (MP)</specialization>
+            <specialization code="PC">Physique et Chimie (PC)</specialization>
+            <specialization code="BG">Biologie et Géologie (BG)</specialization>
+            <specialization code="PT">Physique et Technologie (PT)</specialization>
+        </specializations>
+        <books>
+            <book id="B022" grade="1" specialization="MP">
+                <title>Mathématiques Supérieures - MP</title>
+                <subject>Advanced Mathematics</subject>
+                <author>Ali Jendoubi</author>
+                <isbn>978-9973-129-01-2</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B023" grade="1" specialization="PC">
+                <title>Physique Générale - PC</title>
+                <subject>General Physics</subject>
+                <author>Sami Bouaziz</author>
+                <isbn>978-9973-129-02-9</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B024" grade="2" specialization="MP">
+                <title>Analyse et Algèbre - Spé MP</title>
+                <subject>Advanced Mathematics</subject>
+                <author>Nejla Hammami</author>
+                <isbn>978-9973-129-03-6</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B025" grade="1" specialization="BG">
+                <title>Biologie Cellulaire et Moléculaire</title>
+                <subject>Cell Biology</subject>
+                <author>Mounir Zarrouk</author>
+                <isbn>978-9973-129-04-3</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B026" grade="2" specialization="PT">
+                <title>Sciences Industrielles de l'Ingénieur</title>
+                <subject>Industrial Engineering</subject>
+                <author>Hafedh Abdelkafi</author>
+                <isbn>978-9973-129-05-0</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+        </books>
+    </educationLevel>
+
+    <!-- Engineering School (École d'Ingénieurs) -->
+    <educationLevel id="L005" code="ENGINEERING">
+        <n>École d'Ingénieurs</n>
+        <duration>3 years</duration>
+        <grades>
+            <grade number="1">1ère année ingénieur</grade>
+            <grade number="2">2ème année ingénieur</grade>
+            <grade number="3">3ème année ingénieur (Diplôme)</grade>
+        </grades>
+        <specializations>
+            <specialization code="CIVIL">Génie Civil</specialization>
+            <specialization code="MECH">Génie Mécanique</specialization>
+            <specialization code="ELEC">Génie Électrique</specialization>
+            <specialization code="INFO">Génie Informatique</specialization>
+            <specialization code="INDUS">Génie Industriel</specialization>
+            <specialization code="TELECOM">Télécommunications</specialization>
+            <specialization code="CHEM">Génie Chimique</specialization>
+            <specialization code="ENERGY">Génie Énergétique</specialization>
+        </specializations>
+        <books>
+            <book id="B027" grade="1" specialization="INFO">
+                <title>Structures de Données et Algorithmes</title>
+                <subject>Computer Science</subject>
+                <author>Amine Ben Halima</author>
+                <isbn>978-9973-130-01-8</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B028" grade="2" specialization="CIVIL">
+                <title>Résistance des Matériaux</title>
+                <subject>Civil Engineering</subject>
+                <author>Kamel Mrad</author>
+                <isbn>978-9973-130-02-5</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B029" grade="3" specialization="ELEC">
+                <title>Électronique de Puissance</title>
+                <subject>Electrical Engineering</subject>
+                <author>Faouzi Bacha</author>
+                <isbn>978-9973-130-03-2</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B030" grade="2" specialization="MECH">
+                <title>Thermodynamique Appliquée</title>
+                <subject>Mechanical Engineering</subject>
+                <author>Mohamed Affi</author>
+                <isbn>978-9973-130-04-9</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B031" grade="3" specialization="INFO">
+                <title>Intelligence Artificielle et Systèmes Experts</title>
+                <subject>Artificial Intelligence</subject>
+                <author>Rim Faiz</author>
+                <isbn>978-9973-130-05-6</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B032" grade="1" specialization="TELECOM">
+                <title>Traitement du Signal</title>
+                <subject>Signal Processing</subject>
+                <author>Ezzedine Ben Braiek</author>
+                <isbn>978-9973-130-06-3</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B033" grade="2" specialization="INDUS">
+                <title>Gestion de la Production Industrielle</title>
+                <subject>Industrial Management</subject>
+                <author>Nidhal Rezg</author>
+                <isbn>978-9973-130-07-0</isbn>
+                <publicationYear>2022</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
         </books>
     </educationLevel>
 
     <!-- Higher Education - Licence (Bachelor) -->
-    <educationLevel id="L004" code="LICENCE">
+    <educationLevel id="L006" code="LICENCE">
         <n>Licence (Bachelor)</n>
         <duration>3 years</duration>
         <fields>
@@ -180,7 +347,7 @@
     </educationLevel>
 
     <!-- Master's Degree (Mastère) -->
-    <educationLevel id="L005" code="MASTER">
+    <educationLevel id="L007" code="MASTER">
         <n>Mastère (Master)</n>
         <duration>2 years</duration>
         <types>
@@ -229,7 +396,7 @@
     </educationLevel>
 
     <!-- Doctorate (Doctorat) -->
-    <educationLevel id="L006" code="DOCTORATE">
+    <educationLevel id="L008" code="DOCTORATE">
         <n>Doctorat (PhD)</n>
         <duration>3-5 years</duration>
         <fields>

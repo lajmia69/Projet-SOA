@@ -21,9 +21,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
         servletContext.addListener(new ContextLoaderListener(context));
         
         // Register the Spring DispatcherServlet for REST
-        // Map REST controllers under /api/* so static resources (index.html) are served by default servlet
+        AnnotationConfigWebApplicationContext restContext = new AnnotationConfigWebApplicationContext();
+        restContext.register(SpringConfig.class);
+        
         ServletRegistration.Dynamic restServlet = servletContext.addServlet(
-            "restServlet", new DispatcherServlet(context));
+            "restServlet", new DispatcherServlet(restContext));
         restServlet.setLoadOnStartup(1);
         restServlet.addMapping("/api/*");
         
@@ -32,5 +34,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic soapServlet = servletContext.addServlet("cxfServlet", cxfServlet);
         soapServlet.setLoadOnStartup(1);
         soapServlet.addMapping("/soap/*");
+        
+        // Enable default servlet for static content
+        servletContext.getServletRegistration("default").addMapping("/");
     }
 }
