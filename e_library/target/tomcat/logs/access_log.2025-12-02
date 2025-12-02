@@ -1,0 +1,14 @@
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:02:12 +0100] "GET / HTTP/1.1" 200 21369 http-bio-8080-exec-1 42
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:02:13 +0100] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-3 2
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:02:18 +0100] "GET /api/elibrary/education-levels/PREP_ENG HTTP/1.1" 200 1758 http-bio-8080-exec-4 129
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:02:31 +0100] "HEAD /books/B022.pdf HTTP/1.1" 404 - http-bio-8080-exec-5 1
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:02:58 +0100] "GET / HTTP/1.1" 304 - http-bio-8080-exec-6 4
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:04:16 +0100] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-1 39
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:04:21 +0100] "GET /api/elibrary/education-levels/PRIMARY HTTP/1.1" 200 1249 http-bio-8080-exec-4 128
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:04:35 +0100] "GET /api/elibrary/education-levels/PREPARATORY HTTP/1.1" 200 859 http-bio-8080-exec-5 3
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:04:47 +0100] "GET /api/elibrary/education-levels/SECONDARY HTTP/1.1" 200 1901 http-bio-8080-exec-6 5
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:05:39 +0100] "GET /api/elibrary/education-levels/PREP_ENG HTTP/1.1" 200 1758 http-bio-8080-exec-8 3
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:06:11 +0100] "GET /api/elibrary/education-levels/ENGINEERING HTTP/1.1" 200 2485 http-bio-8080-exec-9 7
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:06:25 +0100] "GET /api/elibrary/education-levels/LICENCE HTTP/1.1" 200 1536 http-bio-8080-exec-10 5
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:06:29 +0100] "GET /api/elibrary/education-levels/MASTER HTTP/1.1" 200 1463 http-bio-8080-exec-10 5
+0:0:0:0:0:0:0:1 - - [02/Dec/2025:13:06:32 +0100] "GET /api/elibrary/education-levels/DOCTORATE HTTP/1.1" 200 1697 http-bio-8080-exec-10 3
