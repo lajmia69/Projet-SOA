@@ -176,6 +176,29 @@
                 <format>PDF</format>
                 <language>French</language>
             </book>
+
+                    <book id="B024pc" grade="1" specialization="PC">
+                <title>ALGÈBRE ET GÉOMÉTRIE PC-PSI-PT - PC</title>
+                <subject>General Physics</subject>
+                <author> Jean-Marie Monier</author>
+                <isbn>978-9973-129-02-9</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            
+                    <book id="B024pt" grade="1" specialization="PT">
+                <title>ALGÈBRE ET GÉOMÉTRIE PC-PSI-PT - PC</title>
+                <subject>General Physics</subject>
+                <author> Jean-Marie Monier</author>
+                <isbn>978-9973-129-02-9</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+
+
+
             <book id="B024" grade="2" specialization="MP">
                 <title>Analyse et Algèbre - Spé MP</title>
                 <subject>Advanced Mathematics</subject>
