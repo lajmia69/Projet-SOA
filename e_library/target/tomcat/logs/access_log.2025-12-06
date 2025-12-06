@@ -1,0 +1,14 @@
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:20 +0100] "GET / HTTP/1.1" 304 - http-bio-8080-exec-1 30
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:20 +0100] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-3 4
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:37 +0100] "GET /api/elibrary/education-levels/PRIMARY HTTP/1.1" 200 1555 http-bio-8080-exec-4 133
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:40 +0100] "HEAD /books/B001.pdf HTTP/1.1" 200 - http-bio-8080-exec-5 4
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:41 +0100] "GET /books/B001.pdf HTTP/1.1" 200 18772100 http-bio-8080-exec-6 279
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:49 +0100] "GET /api/elibrary/education-levels/PREP_ENG HTTP/1.1" 200 2249 http-bio-8080-exec-7 5
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:52 +0100] "HEAD /books/B022.pdf HTTP/1.1" 200 - http-bio-8080-exec-8 3
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:53 +0100] "GET /books/B022.pdf HTTP/1.1" 200 5206915 http-bio-8080-exec-9 212
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:57 +0100] "HEAD /books/B023.pdf HTTP/1.1" 200 - http-bio-8080-exec-10 2
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:25:57 +0100] "GET /books/B023.pdf HTTP/1.1" 200 6352648 http-bio-8080-exec-10 204
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:26:00 +0100] "HEAD /books/B025.pdf HTTP/1.1" 200 - http-bio-8080-exec-10 2
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:26:00 +0100] "GET /books/B025.pdf HTTP/1.1" 200 10908593 http-bio-8080-exec-10 233
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:26:10 +0100] "HEAD /books/B026.pdf HTTP/1.1" 200 - http-bio-8080-exec-10 2
+0:0:0:0:0:0:0:1 - - [06/Dec/2025:11:26:24 +0100] "GET /books/B026.pdf HTTP/1.1" 200 577430816 http-bio-8080-exec-10 14701

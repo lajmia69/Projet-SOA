@@ -24,9 +24,18 @@
                 <format>PDF</format>
                 <language>Arabic</language>
             </book>
-            <book id="B002" grade="1">
+            <book id="B002a" grade="1">
                 <title>Mathématiques 1ère année</title>
-                <subject>Mathematics</subject>
+                <subject>Mathematics 1</subject>
+                <author>وزارة التربية التونسية</author>
+                <isbn>978-9973-123-46-3</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>Arabic</language>
+            </book>
+             <book id="B002b" grade="1">
+                <title>Mathématiques 1ère année</title>
+                <subject>Mathematics 2</subject>
                 <author>Ministère de l'Éducation</author>
                 <isbn>978-9973-123-46-3</isbn>
                 <publicationYear>2023</publicationYear>
@@ -34,13 +43,13 @@
                 <language>French</language>
             </book>
             <book id="B003" grade="6">
-                <title>Sciences Naturelles 6ème année</title>
-                <subject>Natural Sciences</subject>
-                <author>Ahmed Ben Salem</author>
+                <title>histoire geo pour la 6eme année</title>
+                <subject>history geography</subject>
+                <author>وزارة التربية التونسية</author>
                 <isbn>978-9973-123-47-0</isbn>
                 <publicationYear>2022</publicationYear>
                 <format>EPUB</format>
-                <language>French</language>
+                <language>Arabic</language>
             </book>
         </books>
     </educationLevel>
@@ -57,16 +66,25 @@
         <books>
             <book id="B004" grade="9">
                 <title>Physique-Chimie 9ème année</title>
-                <subject>Physics and Chemistry</subject>
-                <author>Mohamed Trabelsi</author>
+                <subject> SCIENCES PHYSIQUES </subject>
+                <author> Centre National Pédagogique</author>
                 <isbn>978-9973-124-01-2</isbn>
                 <publicationYear>2023</publicationYear>
                 <format>PDF</format>
                 <language>French</language>
             </book>
+                        <book id="B0041" grade="9">
+                <title>Math pour 9eme</title>
+                <subject> Maths </subject>
+                <author> Centre National Pédagogique</author>
+                <isbn>978-9973-124-01-2</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>Arabic</language>
+            </book>
             <book id="B005" grade="8">
-                <title>التاريخ والجغرافيا للسنة الثامنة</title>
-                <subject>History and Geography</subject>
+                <title>التربية الاسلامية</title>
+                <subject>Islamic culture</subject>
                 <author>فاطمة بن عمر</author>
                 <isbn>978-9973-124-02-9</isbn>
                 <publicationYear>2022</publicationYear>
@@ -96,7 +114,16 @@
         </specializations>
         <books>
             <book id="B006" grade="13" specialization="MATH">
-                <title>Analyse Mathématique - Bac Mathématiques</title>
+                <title>Mathématique I - Bac Mathématiques</title>
+                <subject>Advanced Mathematics</subject>
+                <author>Hedi Lakhal</author>
+                <isbn>978-9973-125-01-8</isbn>
+                <publicationYear>2023</publicationYear>
+                <format>PDF</format>
+                <language>French</language>
+            </book>
+            <book id="B006a" grade="13" specialization="MATH">
+                <title>Mathématique II - Bac Mathématiques</title>
                 <subject>Advanced Mathematics</subject>
                 <author>Hedi Lakhal</author>
                 <isbn>978-9973-125-01-8</isbn>
@@ -114,27 +141,27 @@
                 <language>French</language>
             </book>
             <book id="B008" grade="12" specialization="INFO">
-                <title>Programmation et Algorithmique</title>
-                <subject>Computer Science</subject>
-                <author>Karim Jebali</author>
+                <title>Math</title>
+                <subject>Mathematics</subject>
+                <author> Hikma Smida</author>
                 <isbn>978-9973-125-03-2</isbn>
                 <publicationYear>2022</publicationYear>
                 <format>PDF</format>
                 <language>French</language>
             </book>
             <book id="B020" grade="10">
-                <title>Introduction aux Sciences</title>
+                <title>Science de la vie et de la terre</title>
                 <subject>General Sciences</subject>
-                <author>Nadia Mansour</author>
+                <author>Mongi Abid</author>
                 <isbn>978-9973-125-10-0</isbn>
                 <publicationYear>2023</publicationYear>
                 <format>PDF</format>
                 <language>French</language>
             </book>
-            <book id="B021" grade="11" specialization="MATH">
-                <title>Algèbre et Géométrie</title>
-                <subject>Mathematics</subject>
-                <author>Kamel Toumi</author>
+            <book id="B021" grade="10">
+                <title>Biologie pour section SPORTIF</title>
+                <subject>Bilologie</subject>
+                <author>Khaled Rjeb</author>
                 <isbn>978-9973-125-11-7</isbn>
                 <publicationYear>2023</publicationYear>
                 <format>PDF</format>
@@ -159,18 +186,18 @@
         </specializations>
         <books>
             <book id="B022" grade="1" specialization="MP">
-                <title>Mathématiques Supérieures - MP</title>
+                <title>Structure Algebrique</title>
                 <subject>Advanced Mathematics</subject>
-                <author>Ali Jendoubi</author>
+                <author>Etudient </author>
                 <isbn>978-9973-129-01-2</isbn>
                 <publicationYear>2023</publicationYear>
                 <format>PDF</format>
                 <language>French</language>
             </book>
             <book id="B023" grade="1" specialization="PC">
-                <title>Physique Générale - PC</title>
+                <title>Resume Chemie Organique</title>
                 <subject>General Physics</subject>
-                <author>Sami Bouaziz</author>
+                <author>Etudient</author>
                 <isbn>978-9973-129-02-9</isbn>
                 <publicationYear>2023</publicationYear>
                 <format>PDF</format>
@@ -179,7 +206,7 @@
 
                     <book id="B024pc" grade="1" specialization="PC">
                 <title>ALGÈBRE ET GÉOMÉTRIE PC-PSI-PT - PC</title>
-                <subject>General Physics</subject>
+                <subject>Advaned Mathematics</subject>
                 <author> Jean-Marie Monier</author>
                 <isbn>978-9973-129-02-9</isbn>
                 <publicationYear>2023</publicationYear>
@@ -189,7 +216,7 @@
             
                     <book id="B024pt" grade="1" specialization="PT">
                 <title>ALGÈBRE ET GÉOMÉTRIE PC-PSI-PT - PC</title>
-                <subject>General Physics</subject>
+                <subject>Advanced Mathematics</subject>
                 <author> Jean-Marie Monier</author>
                 <isbn>978-9973-129-02-9</isbn>
                 <publicationYear>2023</publicationYear>
@@ -200,9 +227,9 @@
 
 
             <book id="B024" grade="2" specialization="MP">
-                <title>Analyse et Algèbre - Spé MP</title>
+                <title>Resume Proba</title>
                 <subject>Advanced Mathematics</subject>
-                <author>Nejla Hammami</author>
+                <author>Etudient</author>
                 <isbn>978-9973-129-03-6</isbn>
                 <publicationYear>2023</publicationYear>
                 <format>PDF</format>
@@ -210,8 +237,8 @@
             </book>
             <book id="B025" grade="1" specialization="BG">
                 <title>Biologie Cellulaire et Moléculaire</title>
-                <subject>Cell Biology</subject>
-                <author>Mounir Zarrouk</author>
+                <subject>Genetique</subject>
+                <author>Jamel Ayadi</author>
                 <isbn>978-9973-129-04-3</isbn>
                 <publicationYear>2022</publicationYear>
                 <format>PDF</format>
