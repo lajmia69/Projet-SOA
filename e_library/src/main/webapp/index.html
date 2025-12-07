@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tunisian E-Library System</title>
+  <title>Knowledge Realm - Tunisian E-Library</title>
+  <link rel="icon" type="image/png" href="logo.jpg">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Amiri:wght@700&display=swap');
+
     * {
   margin: 0;
   padding: 0;
@@ -42,24 +45,135 @@ body::before {
 
 header {
   text-align: center;
-  color: white;
   margin-bottom: 40px;
-  animation: fadeIn 1s ease-in;
-  text-shadow: 2px 2px 4px rgba(139, 58, 58, 0.3);
+  animation: fadeIn 2s ease-in;
+  position: relative;
 }
 
-header h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  text-shadow: 3px 3px 6px rgba(139, 58, 58, 0.4);
-  color: #8b3a3a;
+
+
+@keyframes floatFlag {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0px);
+  }
+  25% {
+    transform: translateX(-50%) translateY(-12px);
+  }
+  50% {
+    transform: translateX(-50%) translateY(0px);
+  }
+  75% {
+    transform: translateX(-50%) translateY(-12px);
+  }
 }
 
-header p {
+@keyframes waveFlag {
+  0%, 100% {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg);
+    filter: brightness(1);
+  }
+  15% {
+    transform: perspective(1200px) rotateY(-8deg) rotateX(2deg);
+    filter: brightness(1.1);
+  }
+  30% {
+    transform: perspective(1200px) rotateY(-5deg) rotateX(-1deg);
+    filter: brightness(0.95);
+  }
+  50% {
+    transform: perspective(1200px) rotateY(8deg) rotateX(2deg);
+    filter: brightness(1.05);
+  }
+  65% {
+    transform: perspective(1200px) rotateY(5deg) rotateX(-1deg);
+    filter: brightness(0.95);
+  }
+  85% {
+    transform: perspective(1200px) rotateY(-8deg) rotateX(1deg);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes ripple {
+  0%, 100% {
+    clip-path: polygon(
+      0% 0%, 
+      100% 0%, 
+      100% 100%, 
+      0% 100%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      0% 2%, 
+      100% 0%, 
+      100% 98%, 
+      0% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      0% 0%, 
+      100% 2%, 
+      100% 100%, 
+      0% 98%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      0% 1%, 
+      100% 0%, 
+      100% 99%, 
+      0% 100%
+    );
+  }
+}
+
+
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: white;
+  text-shadow: 
+    3px 3px 6px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.3);
+  margin: 0 0 15px 0;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.title-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 2.8rem;
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 
+    2px 2px 5px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.2);
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  direction: rtl;
+  letter-spacing: 2px;
+}
+
+.subtitle {
   font-size: 1.2rem;
-  opacity: 0.95;
-  color: #5a2828;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .filter-section {
@@ -75,6 +189,7 @@ header p {
 
 .filter-section::before {
   content: '';
+  color: white;
   position: absolute;
   top: -3px;
   left: -3px;
@@ -354,14 +469,6 @@ select:focus {
 }
 
 @media (max-width: 768px) {
-  header h1 {
-    font-size: 2rem;
-  }
-
-  header p {
-    font-size: 1rem;
-  }
-
   .books-grid {
     grid-template-columns: 1fr;
   }
@@ -371,20 +478,12 @@ select:focus {
 <body>
   <div class="container">
     <header>
-<h1>
-  <svg width="40" height="30" viewBox="0 0 40 30" style="display: inline-block; vertical-align: middle; margin-right: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 4px;">
-    <!-- Red background -->
-    <rect width="40" height="30" fill="#E70013"/>
-    <!-- White circle -->
-    <circle cx="20" cy="15" r="8" fill="white"/>
-    <!-- Red crescent (created by overlapping red circle) -->
-    <circle cx="21.5" cy="15" r="6.5" fill="#E70013"/>
-    <!-- White star -->
-    <path d="M 20 10 L 20.8 12.5 L 23.5 12.5 L 21.3 14 L 22.1 16.5 L 20 15 L 17.9 16.5 L 18.7 14 L 16.5 12.5 L 19.2 12.5 Z" fill="white"/>
-  </svg>
-  Welcome to the Tunisian E-Library
-</h1>
-<p>Explore educational resources across all levels</p>
+     
+            <h1 class="title">Knowledge Realm</h1>
+            <h2 class="title-arabic">مملكة المعرفة</h2>
+            <p class="subtitle">Explore educational resources across all levels</p>
+          
+      </div>
     </header>
 
     <div class="filter-section">
@@ -525,7 +624,6 @@ select:focus {
       try {
         console.log('Loading education level data for:', levelCode);
         
-        // Load the complete education level data
         const url = `/api/elibrary/education-levels/${levelCode}`;
         console.log('Fetching from URL:', url);
         
@@ -549,17 +647,14 @@ select:focus {
         allBooks = currentLevelData.books || [];
         console.log('Total books:', allBooks.length);
         
-        // Reset all filters
         gradeSelect.innerHTML = '<option value="">-- All Grades --</option>';
         specializationSelect.innerHTML = '<option value="">-- All Specializations --</option>';
         fieldSelect.innerHTML = '<option value="">-- All Fields --</option>';
         
-        // Hide all filter groups initially
         gradeGroup.style.display = 'none';
         specializationGroup.style.display = 'none';
         fieldGroup.style.display = 'none';
         
-        // Show grade filter if grades exist
         if (currentLevelData.grades && currentLevelData.grades.length > 0) {
           console.log('Found grades:', currentLevelData.grades.length);
           gradeGroup.style.display = 'block';
@@ -571,7 +666,6 @@ select:focus {
           });
         }
         
-        // Show specialization filter if specializations exist
         if (currentLevelData.specializations && currentLevelData.specializations.length > 0) {
           console.log('Found specializations:', currentLevelData.specializations.length);
           console.log('Specializations:', currentLevelData.specializations);
@@ -585,7 +679,6 @@ select:focus {
           });
         }
         
-        // Show field filter if fields exist
         if (currentLevelData.fields && currentLevelData.fields.length > 0) {
           console.log('Found fields:', currentLevelData.fields.length);
           fieldGroup.style.display = 'block';
@@ -597,7 +690,6 @@ select:focus {
           });
         }
         
-        // Debug info
         debugInfo.style.display = 'block';
         debugInfo.innerHTML = `
           <strong>Debug Info:</strong><br>
@@ -608,7 +700,6 @@ select:focus {
           Books: ${allBooks.length}
         `;
         
-        // Display all books initially
         filterAndDisplayBooks();
         
       } catch (error) {
@@ -628,7 +719,6 @@ select:focus {
       
       let filteredBooks = allBooks;
       
-      // Filter by grade
       if (selectedGrade) {
         filteredBooks = filteredBooks.filter(book => 
           book.grade && book.grade.toString() === selectedGrade
@@ -636,7 +726,6 @@ select:focus {
         console.log('After grade filter:', filteredBooks.length);
       }
       
-      // Filter by specialization
       if (selectedSpecialization) {
         filteredBooks = filteredBooks.filter(book => {
           console.log('Book specialization:', book.specialization, 'Selected:', selectedSpecialization);
@@ -645,13 +734,11 @@ select:focus {
         console.log('After specialization filter:', filteredBooks.length);
       }
       
-      // Filter by field
       if (selectedField) {
         filteredBooks = filteredBooks.filter(book => book.field === selectedField);
         console.log('After field filter:', filteredBooks.length);
       }
       
-      // Build title
       const levelName = levelSelect.options[levelSelect.selectedIndex].text;
       let titleParts = [levelName];
       
@@ -731,7 +818,6 @@ select:focus {
         tags.appendChild(tag);
       });
       
-      // Add download button
       const actions = document.createElement('div');
       actions.className = 'book-actions';
       
@@ -752,16 +838,13 @@ select:focus {
     }
 
     function openBook(book) {
-      // Construct the PDF path based on book ID
       const pdfPath = `/books/${book.id}.pdf`;
       
-      // Try to open the PDF in a new tab
       const link = document.createElement('a');
       link.href = pdfPath;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       
-      // Check if file exists before opening
       fetch(pdfPath, { method: 'HEAD' })
         .then(response => {
           if (response.ok) {
