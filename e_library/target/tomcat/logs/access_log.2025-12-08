@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [08/Dec/2025:08:40:33 +0100] "GET / HTTP/1.1" 304 - http-bio-8080-exec-1 51
+0:0:0:0:0:0:0:1 - - [08/Dec/2025:08:40:50 +0100] "GET /api/elibrary/education-levels/PRIMARY HTTP/1.1" 200 1555 http-bio-8080-exec-4 229
